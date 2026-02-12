@@ -1,0 +1,108 @@
+import Foundation
+import AVFoundation
+
+/// Configuration constants for Jarvis
+///
+/// Copy this file to `Constants.swift` and fill in your actual API keys.
+/// The `Constants.swift` file is gitignored to keep your secrets safe.
+enum Constants {
+
+    // MARK: - API Configuration
+
+    /// Grok API Configuration
+    /// Get your API key from: https://console.x.ai/
+    enum Grok {
+        static let apiKey = "YOUR_XAI_API_KEY"
+        static let baseURL = "wss://api.x.ai/v1/realtime"
+        static let model = "grok-voice-agent"
+    }
+
+    /// Meta Wearables Configuration
+    /// Register at: https://wearables.developer.meta.com
+    /// OR use Developer Mode in Meta AI app (leave these empty for Developer Mode)
+    enum Meta {
+        static let appID = ""  // Optional with Developer Mode
+        static let clientToken = ""  // Optional with Developer Mode
+    }
+
+    // MARK: - Video Configuration
+
+    enum Video {
+        /// Maximum FPS from Meta Ray-Ban glasses via DAT SDK (Bluetooth limited)
+        static let streamingFPS: Int = 30
+
+        /// Throttled FPS sent to Grok API (saves bandwidth and tokens)
+        static let llmThrottleFPS: Double = 1.5
+
+        /// PNG compression quality for snapshot storage (0.0 - 1.0)
+        static let snapshotQuality: CGFloat = 0.7
+
+        /// JPEG compression quality for streaming to LLM (0.0 - 1.0)
+        static let jpegQuality: CGFloat = 0.5
+    }
+
+    // MARK: - Audio Configuration
+
+    enum Audio {
+        /// Input sample rate: Microphone to Grok (Hz)
+        static let inputSampleRate: Double = 16000
+
+        /// Output sample rate: Grok to Speaker (Hz)
+        static let outputSampleRate: Double = 24000
+
+        /// Number of audio channels (1 = mono)
+        static let channels: UInt32 = 1
+
+        /// Audio buffer size for processing
+        static let bufferSize: AVAudioFrameCount = 4096
+
+        /// Minimum bytes to accumulate before sending (100ms at 16kHz mono Int16)
+        static let minSendBytes: Int = 3200
+    }
+
+    // MARK: - Storage Configuration
+
+    enum Storage {
+        /// Maximum snapshots to keep per conversation
+        static let maxSnapshotsPerConversation: Int = 100
+
+        /// Auto-delete conversations older than this (seconds)
+        static let maxConversationAge: TimeInterval = 60 * 60 * 24 * 90  // 90 days
+
+        /// Enable iCloud sync for SwiftData
+        /// Note: Requires iCloud capability enabled in project
+        static let enableiCloudSync: Bool = false
+    }
+
+    // MARK: - Feature Flags
+
+    enum Features {
+        /// Enable iPhone camera fallback mode for testing without glasses
+        static let enableIPhoneFallback: Bool = true
+
+        /// Enable mock devices for DEBUG builds (requires MWDATMockDevice)
+        static let enableMockDevices: Bool = true
+
+        /// Enable voice settings panel
+        static let enableVoiceSettings: Bool = true
+
+        /// Enable photo capture from glasses
+        static let enablePhotoCapture: Bool = true
+
+        /// Enable debug overlay showing FPS and connection status
+        static let enableDebugOverlay: Bool = false
+    }
+
+    // MARK: - App Configuration
+
+    enum App {
+        /// App URL scheme for Meta AI app callbacks
+        static let urlScheme = "jarvis"
+
+        /// App display name
+        static let displayName = "Jarvis"
+
+        /// App version (should match CFBundleShortVersionString)
+        static let version = "1.0.0"
+    }
+}
