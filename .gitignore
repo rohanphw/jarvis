@@ -4,12 +4,15 @@
 
 ## User settings
 xcuserdata/
+*.xcuserstate
+*.xcuserdatad
 
 ## Xcode Patch
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
 !*.xcodeproj/xcshareddata/
 !*.xcodeproj/project.xcworkspace/
+!*.xcodeproj/project.xcworkspace/xcshareddata/
 !*.xcworkspace/contents.xcworkspacedata
 
 ## Build generated
@@ -94,3 +97,5 @@ Temporary Items
 
 # Claude Code plans (optional - uncomment if you don't want to track plans)
 # .claude/
+
+docs/

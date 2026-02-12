@@ -27,13 +27,11 @@ class ConversationRepository {
         to conversation: Conversation,
         role: MessageRole,
         content: String,
-        snapshot: Data? = nil,
         audioMetadata: AudioMetadata? = nil
     ) {
         let message = Message(
             role: role,
             content: content,
-            snapshot: snapshot,
             audioMetadata: audioMetadata
         )
         message.conversation = conversation
@@ -168,10 +166,6 @@ class ConversationRepository {
 
             """
 
-            if message.hasSnapshot {
-                output += "_[Snapshot attached]_\n\n"
-            }
-
             if let audio = message.audioMetadata {
                 output += "_Duration: \(String(format: "%.1f", audio.durationSeconds))s"
                 if let cost = audio.costUSD {
@@ -199,16 +193,8 @@ class ConversationRepository {
                     "id": message.id.uuidString,
                     "role": message.role.rawValue,
                     "content": message.content,
-                    "timestamp": message.timestamp.ISO8601Format(),
-                    "hasSnapshot": message.hasSnapshot
+                    "timestamp": message.timestamp.ISO8601Format()
                 ]
-
-                // Add snapshot if exists
-                if let snapshotData = message.snapshot {
-                    messageDict["snapshot"] = snapshotData.base64EncodedString()
-                } else {
-                    messageDict["snapshot"] = NSNull()
-                }
 
                 // Add audio metadata if exists
                 if let audio = message.audioMetadata {
@@ -240,6 +226,45 @@ class ConversationRepository {
         return try? JSONSerialization.data(withJSONObject: exportData, options: .prettyPrinted)
     }
 
+    /// Export all conversations as combined Markdown
+    func exportAllConversations() -> String {
+        let conversations = fetchAllConversations()
+
+        var output = """
+        # Jarvis Conversation Export
+
+        **Exported:** \(Date().formatted(date: .long, time: .shortened))
+        **Total Conversations:** \(conversations.count)
+        **Total Messages:** \(conversations.reduce(0) { $0 + $1.messageCount })
+
+        ---
+
+        """
+
+        for conversation in conversations {
+            output += "\n\n"
+            output += exportConversation(conversation)
+            output += "\n\n"
+        }
+
+        return output
+    }
+
+    /// Export all conversations as JSON array
+    func exportAllConversationsAsJSON() -> Data? {
+        let conversations = fetchAllConversations()
+
+        let exportArray = conversations.compactMap { conversation in
+            if let jsonData = exportConversationAsJSON(conversation),
+               let json = try? JSONSerialization.jsonObject(with: jsonData) {
+                return json
+            }
+            return nil
+        }
+
+        return try? JSONSerialization.data(withJSONObject: exportArray, options: .prettyPrinted)
+    }
+
     // MARK: - Analytics
 
     /// Get total number of conversations
@@ -255,14 +280,17 @@ class ConversationRepository {
     }
 
     /// Get storage usage estimate (in MB)
+    /// Note: Returns approximate text-based storage only
     func getStorageUsageEstimate() -> Double {
         let conversations = fetchAllConversations()
-        let totalBytes = conversations.reduce(0) { total, conversation in
+        // Rough estimate: count characters in content
+        let totalChars = conversations.reduce(0) { total, conversation in
             total + conversation.messages.reduce(0) { msgTotal, message in
-                msgTotal + (message.snapshot?.count ?? 0)
+                msgTotal + message.content.count
             }
         }
-        return Double(totalBytes) / 1_048_576 // Convert to MB
+        // Approximate 2 bytes per character
+        return Double(totalChars * 2) / 1_048_576 // Convert to MB
     }
 
     // MARK: - Private Helpers

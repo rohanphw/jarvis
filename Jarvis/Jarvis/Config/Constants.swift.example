@@ -3,18 +3,22 @@ import AVFoundation
 
 /// Configuration constants for Jarvis
 ///
-/// Copy this file to `Constants.swift` and fill in your actual API keys.
+/// NOTE: API keys are now managed through the app's Settings/API Key screen
+/// and stored securely in the iOS Keychain. You no longer need to add them here!
+///
+/// Copy this file to `Constants.swift` - you can leave the API key empty.
 /// The `Constants.swift` file is gitignored to keep your secrets safe.
 enum Constants {
 
     // MARK: - API Configuration
 
-    /// Grok API Configuration
-    /// Get your API key from: https://console.x.ai/
-    enum Grok {
-        static let apiKey = "YOUR_XAI_API_KEY"
-        static let baseURL = "wss://api.x.ai/v1/realtime"
-        static let model = "grok-voice-agent"
+    /// Claude API Configuration (Anthropic)
+    /// NOTE: API keys are now managed in-app via Settings > API Key
+    /// Leave this empty and use the app's secure keychain storage instead.
+    /// Get your API key from: https://console.anthropic.com/
+    enum Claude {
+        static let apiKey = ""  // Use app's API Key screen instead
+        static let model = "claude-haiku-4-5-20251001"
     }
 
     /// Meta Wearables Configuration

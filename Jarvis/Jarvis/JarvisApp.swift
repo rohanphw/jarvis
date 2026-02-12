@@ -61,7 +61,8 @@ struct JarvisApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainAppView()
+                .preferredColorScheme(.dark)  // Force dark mode
         }
         .modelContainer(modelContainer)
     }

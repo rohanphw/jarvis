@@ -2,6 +2,40 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<!-- Bundle Identifier -->
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+
+	<!-- App Info -->
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+
+	<key>CFBundleDisplayName</key>
+	<string>Jarvis</string>
+
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+
+	<key>CFBundleVersion</key>
+	<string>1</string>
+
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>arm64</string>
+	</array>
+
 	<!-- ========== META WEARABLES DAT SDK — REQUIRED ========== -->
 	<key>MWDAT</key>
 	<dict>
@@ -32,6 +66,9 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Used for voice conversations with your AI assistant</string>
 
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Jarvis uses speech recognition to understand your voice commands</string>
+
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Save photos captured from your glasses</string>
 
@@ -61,6 +98,23 @@
 				<string>jarvis</string>
 			</array>
 		</dict>
+	</array>
+
+	<!-- Launch Screen -->
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string></string>
+		<key>UIImageName</key>
+		<string></string>
+	</dict>
+
+	<!-- Supported Interface Orientations -->
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 </dict>
 </plist>
