@@ -7,26 +7,62 @@
 
 import SwiftUI
 import SwiftData
+import MWDATCore
+
+#if DEBUG
+import MWDATMockDevice
+#endif
 
 @main
 struct JarvisApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
+    // MARK: - SwiftData Container
+
+    let modelContainer: ModelContainer
+
+    // MARK: - Initialization
+
+    init() {
+        // CRITICAL: Configure Meta DAT SDK first
+        // This must happen before any SDK usage
         do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            try Wearables.configure()
+            print("[Jarvis] ✅ Meta DAT SDK configured successfully")
         } catch {
-            fatalError("Could not create ModelContainer: \(error)")
+            print("[Jarvis] ❌ Meta DAT SDK configuration failed: \(error)")
         }
-    }()
+
+        // Setup SwiftData with Conversation and Message models
+        do {
+            let schema = Schema([
+                Conversation.self,
+                Message.self
+            ])
+
+            // Configure storage with optional iCloud sync
+            let config = ModelConfiguration(
+                schema: schema,
+                isStoredInMemoryOnly: false,
+                cloudKitDatabase: Constants.Storage.enableiCloudSync ? .automatic : .none
+            )
+
+            modelContainer = try ModelContainer(for: schema, configurations: config)
+            print("[Jarvis] ✅ SwiftData ModelContainer initialized")
+
+            if Constants.Storage.enableiCloudSync {
+                print("[Jarvis] ☁️  iCloud sync enabled")
+            }
+        } catch {
+            fatalError("[Jarvis] ❌ Failed to create ModelContainer: \(error)")
+        }
+    }
+
+    // MARK: - Scene
 
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(sharedModelContainer)
+        .modelContainer(modelContainer)
     }
 }
