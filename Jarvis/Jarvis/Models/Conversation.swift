@@ -75,6 +75,3 @@ final class Conversation {
         self.title = preview.isEmpty ? "Conversation" : preview
     }
 }
-
-// MARK: - Identifiable Conformance
-extension Conversation: Identifiable {}

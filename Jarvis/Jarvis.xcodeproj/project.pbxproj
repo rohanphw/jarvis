@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		1CD370A12F3DE4690044BED6 /* MWDATCamera in Frameworks */ = {isa = PBXBuildFile; productRef = 1CD370A02F3DE4690044BED6 /* MWDATCamera */; };
+		1CD370A32F3DE4690044BED6 /* MWDATCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1CD370A22F3DE4690044BED6 /* MWDATCore */; };
+		1CD370A52F3DE4690044BED6 /* MWDATMockDevice in Frameworks */ = {isa = PBXBuildFile; productRef = 1CD370A42F3DE4690044BED6 /* MWDATMockDevice */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		1C52B4972F3DD9C200FE8872 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -29,9 +35,22 @@
 		1C52B4A02F3DD9C200FE8872 /* JarvisUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JarvisUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1CD3709E2F3DE3A00044BED6 /* Exceptions for "Jarvis" folder in "Jarvis" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 1C52B4862F3DD9C100FE8872 /* Jarvis */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1C52B4892F3DD9C100FE8872 /* Jarvis */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				1CD3709E2F3DE3A00044BED6 /* Exceptions for "Jarvis" folder in "Jarvis" target */,
+			);
 			path = Jarvis;
 			sourceTree = "<group>";
 		};
@@ -52,6 +71,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CD370A12F3DE4690044BED6 /* MWDATCamera in Frameworks */,
+				1CD370A52F3DE4690044BED6 /* MWDATMockDevice in Frameworks */,
+				1CD370A32F3DE4690044BED6 /* MWDATCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +100,7 @@
 				1C52B4892F3DD9C100FE8872 /* Jarvis */,
 				1C52B4992F3DD9C200FE8872 /* JarvisTests */,
 				1C52B4A32F3DD9C200FE8872 /* JarvisUITests */,
+				1CD3709F2F3DE4690044BED6 /* Frameworks */,
 				1C52B4882F3DD9C100FE8872 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,6 +113,13 @@
 				1C52B4A02F3DD9C200FE8872 /* JarvisUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		1CD3709F2F3DE4690044BED6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -112,6 +142,9 @@
 			);
 			name = Jarvis;
 			packageProductDependencies = (
+				1CD370A02F3DE4690044BED6 /* MWDATCamera */,
+				1CD370A22F3DE4690044BED6 /* MWDATCore */,
+				1CD370A42F3DE4690044BED6 /* MWDATMockDevice */,
 			);
 			productName = Jarvis;
 			productReference = 1C52B4872F3DD9C100FE8872 /* Jarvis.app */;
@@ -195,6 +228,9 @@
 			);
 			mainGroup = 1C52B47E2F3DD9C100FE8872;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				1C3AF7482F3DDE91001DA1ED /* XCRemoteSwiftPackageReference "meta-wearables-dat-ios" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1C52B4882F3DD9C100FE8872 /* Products */;
 			projectDirPath = "";
@@ -399,7 +435,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6T27JQ25C3;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				"INFOPLIST_FILE[sdk=*]" = Jarvis/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -431,7 +468,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6T27JQ25C3;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				"INFOPLIST_FILE[sdk=*]" = Jarvis/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -578,6 +616,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1C3AF7482F3DDE91001DA1ED /* XCRemoteSwiftPackageReference "meta-wearables-dat-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/meta-wearables-dat-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1CD370A02F3DE4690044BED6 /* MWDATCamera */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C3AF7482F3DDE91001DA1ED /* XCRemoteSwiftPackageReference "meta-wearables-dat-ios" */;
+			productName = MWDATCamera;
+		};
+		1CD370A22F3DE4690044BED6 /* MWDATCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C3AF7482F3DDE91001DA1ED /* XCRemoteSwiftPackageReference "meta-wearables-dat-ios" */;
+			productName = MWDATCore;
+		};
+		1CD370A42F3DE4690044BED6 /* MWDATMockDevice */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C3AF7482F3DDE91001DA1ED /* XCRemoteSwiftPackageReference "meta-wearables-dat-ios" */;
+			productName = MWDATMockDevice;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1C52B47F2F3DD9C100FE8872 /* Project object */;
 }

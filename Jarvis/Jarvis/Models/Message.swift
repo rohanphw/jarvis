@@ -63,6 +63,3 @@ final class Message {
         self.audioMetadata = audioMetadata
     }
 }
-
-// MARK: - Identifiable Conformance
-extension Message: Identifiable {}
