@@ -195,19 +195,45 @@ class ConversationRepository {
             "duration": conversation.duration,
             "mode": conversation.mode.rawValue,
             "messages": conversation.messages.map { message in
-                [
+                var messageDict: [String: Any] = [
                     "id": message.id.uuidString,
                     "role": message.role.rawValue,
                     "content": message.content,
                     "timestamp": message.timestamp.ISO8601Format(),
-                    "hasSnapshot": message.hasSnapshot,
-                    "snapshot": message.snapshot?.base64EncodedString() ?? NSNull(),
-                    "audioMetadata": message.audioMetadata != nil ? [
-                        "durationSeconds": message.audioMetadata!.durationSeconds,
-                        "tokensUsed": message.audioMetadata!.tokensUsed ?? NSNull(),
-                        "costUSD": message.audioMetadata!.costUSD ?? NSNull()
-                    ] : NSNull()
-                ] as [String: Any]
+                    "hasSnapshot": message.hasSnapshot
+                ]
+
+                // Add snapshot if exists
+                if let snapshotData = message.snapshot {
+                    messageDict["snapshot"] = snapshotData.base64EncodedString()
+                } else {
+                    messageDict["snapshot"] = NSNull()
+                }
+
+                // Add audio metadata if exists
+                if let audio = message.audioMetadata {
+                    var audioDict: [String: Any] = [
+                        "durationSeconds": audio.durationSeconds
+                    ]
+
+                    if let tokens = audio.tokensUsed {
+                        audioDict["tokensUsed"] = tokens
+                    } else {
+                        audioDict["tokensUsed"] = NSNull()
+                    }
+
+                    if let cost = audio.costUSD {
+                        audioDict["costUSD"] = cost
+                    } else {
+                        audioDict["costUSD"] = NSNull()
+                    }
+
+                    messageDict["audioMetadata"] = audioDict
+                } else {
+                    messageDict["audioMetadata"] = NSNull()
+                }
+
+                return messageDict
             }
         ]
 
