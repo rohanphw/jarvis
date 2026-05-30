@@ -1,11 +1,5 @@
 # Jarvis - AI Assistant for Meta Ray-Ban Smart Glasses
 
-> Real-time vision + voice AI powered by Claude, streaming at 30 FPS from your Meta Ray-Ban glasses
-
-[![iOS](https://img.shields.io/badge/iOS-17.0+-blue.svg)](https://www.apple.com/ios/)
-[![Swift](https://img.shields.io/badge/Swift-5.9+-orange.svg)](https://swift.org)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-
 Jarvis transforms your Meta Ray-Ban smart glasses into an intelligent AI companion. Stream what you see in real-time, have natural voice conversations with Claude, and get instant insights about your surroundings - all with the elegance of J.A.R.V.I.S. from Iron Man.
 
 ## ✨ Features
